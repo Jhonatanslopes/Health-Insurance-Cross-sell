@@ -7,10 +7,8 @@ import sklearn
 
 
 class CarInsurance:
-
     def __init__(self):
 
-        #self.path                 = 'C:/Users/Jhonatans/projects/ML/Classification/Health-Insurance-Cross-Sell/'
         self.annual_premium = pickle.load(
             open('preparation/annual_premium.pkl', 'rb'))
         self.monthly_premium = pickle.load(
@@ -20,7 +18,8 @@ class CarInsurance:
         self.age = pickle.load(open('preparation/age.pkl', 'rb'))
         self.region_code = pickle.load(
             open('preparation/region_code.pkl', 'rb'))
-        self.vintage = pickle.load(open('preparation/vintage.pkl', 'rb'))
+        self.vintage = pickle.load(
+            open('preparation/vintage.pkl', 'rb'))
 
     def cleaning(self, df1):
 
@@ -67,20 +66,13 @@ class CarInsurance:
         # vintage - MinMaxScaler
         df5['vintage'] = self.vintage.transform(df5[['vintage']].values)
 
-        ## -- Encoding
+        # -- Encoding
         # gender - One Hot Encoding
-        #df5['gender_male'] = df5['gender'].apply(lambda x: 1 if x == 'Male' else 0)
-        #df5['gender_famale'] = df5['gender'].apply(lambda x: 1 if x == 'Female' else 0)
-        #df5 = df5.drop(columns=['gender']).copy()
         df5 = pd.get_dummies(df5, prefix='gender', columns=['gender'])
 
-        # vehicle_age - One Hot Encoding
-        #df5['vehicle_age_< 1 Year'] = df5['vehicle_age'].apply(lambda x: 1 if x == '< 1 Year' else 0)
-        #df5['vehicle_age_1-2 Year'] = df5['vehicle_age'].apply(lambda x: 1 if x == '1-2 Year' else 0)
-        #df5['vehicle_age_> 2 Years'] = df5['vehicle_age'].apply(lambda x: 1 if x == '> 2 Years' else 0)
-        #df5 = df5.drop(columns=['vehicle_age']).copy()
-        df5 = pd.get_dummies(df5, prefix='vehicle_age',
-                             columns=['vehicle_age'])
+        #  vehicle_age - Label Encoding
+        df5['vehicle_age'] = df5['vehicle_age'].map(
+            {'< 1 Year': 1, '1-2 Year': 2, '> 2 Years': 3})
 
         # age_category - Label Encoding
         df5['age_category'] = df5['age_category'].map(
@@ -99,7 +91,7 @@ class CarInsurance:
 
         # -- Feature Selection
         cols_selected = ['vintage', 'annual_premium', 'monthly_premium', 'age', 'region_code',
-                         'policy_sales_channel', 'vehicle_damage', 'previously_insured']
+                         'policy_sales_channel', 'vehicle_damage', 'previously_insured', 'vehicle_age']
 
         return df5[cols_selected]
 

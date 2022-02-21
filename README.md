@@ -1,11 +1,11 @@
 # Health-Insurance-Cross-sell
 
-![code](https://img.shields.io/static/v1?label=python&message=3.8&color=blue) ![license](https://img.shields.io/static/v1?label=license&message=MIT&color=<COLOR>) ![version](https://img.shields.io/static/v1?label=version&message=1.0&color=yellow) ![api](https://img.shields.io/static/v1?label=api&message=flask&color=red) ![deploy](https://img.shields.io/static/v1?label=deploy&message=heroku&color=orange) ![webapp](https://img.shields.io/static/v1?label=deploy&message=streamlit&color=purple)
+![code](https://img.shields.io/static/v1?label=python&message=3.8&color=blue) ![license](https://img.shields.io/static/v1?label=license&message=MIT&color=<COLOR>) ![flask](https://img.shields.io/static/v1?label=flask&message=2.0.3&color=red) ![deploy](https://img.shields.io/static/v1?label=deploy&message=heroku&color=orange) ![streamlit](https://img.shields.io/static/v1?label=streamlit&message=1.5.1&color=purple)
 
 Previsão de interesse em um seguro de automóvel.
 
 <p align="center">
-  <img src="img/insurance.jpg" width="1000" title="img-principal">
+  <img src="img/insurance4.jpg" width="1000" title="img-principal">
 </p>
 
 # Conteúdo
@@ -98,12 +98,12 @@ O Dataset usado para este projeto possui 381109 linhas e 12 colunas. Os dados co
 
 **1. Descrever os Dados:**
 
-- Carregar o conjunto de dados que será utlizado, entender as variáveis disponíveis e verificar possíveis valores faltantes e inconsistências.
+- Coletar os dados no banco de dados, entender as variáveis disponíveis e verificar possíveis valores faltantes e inconsistências.
 - Realizar uma estatística descritiva para entender as características dos dados.
 
 **2. Levantar Hipóteses:**
 
-- Criar Hipóteses sobre as características e o comportamento de venda nas lojas.
+- Criar Hipóteses sobre as características e o comportamento dos clientes interessados no produto.
 - Realizar um Feature Engineering para criar novas variáveis.
 
 **3. Filtrar Dados:**
@@ -118,35 +118,57 @@ O Dataset usado para este projeto possui 381109 linhas e 12 colunas. Os dados co
 
 **5. Preparar os dados**
 
-- Fazer o reescalonamento das variáveis, aplicar Encoding e transformar os dados
+- Fazer o reescalonamento das variáveis e aplicar Encoding.
 
 **6. Selecionar as melhores Features**
 
-- Aplicar o algoritmo Boruta para seleção de Features e adicionar os resultados com as variaveis julgadas importantes na fase de análise exploratória.
+- Usar o algoritmo Random Forest para selecionar as features mais importantes.
 
 **7. Modelagem de Machine Leaning**
 
-- Treinar, validar e aplicar cross validation nos algoritmos de média móvel, Regressão linear, Regressão Linear Regularizada, Random Forest Regressor e XGboost Regressor.
+- Treinar, aplicar cross validation nos algoritmos e validar a partir de métricas apropriadas e curvas de desempenho.
 
 **8. Ajustar os Hiperparametros**
 
-- Encontrar a melhor combinação de parametros para o modelo final usando a técnica de Random Search.
+- Encontrar a melhor combinação de parametros para o modelo final usando a técnica de Grid Search.
 
 **9. Traduzir e Interpretar o erro**
 
-- Transformar a performace de Machine Leaning para resultado de Negócio e trazer cenários da predição para auxilar a tomada de decisão do CFO.
+- Transformar a performace de Machine Leaning para resultado de Negócio, respondendo as perguntas de negócio feitas.
 
 **10. Deploy do Modelo em Produção**
 
-- Deixar o modelo acessível para o CFO acessar os resultados do modelo de qualquer lugar.
-
-# Premissas Assumidas
+- Deixar o modelo acessível utilizando API e com acesso via webApp.
 
 # Hipóteses Principais
 
+### H4. Pessoas que nunca sofreram danos no automóvel estão interessadas em contratar um seguro.
+
+**FALSA** Pessoas que possuem automóvel <ins>com dano</ins>, possuem maior interesse em contratar um seguro.
+
+<p align="center">
+  <img src="img/car_damage.JPG" width="1000" title="img-car_damage">
+</p>
+
+### H5. Pessoas com idade maior que 30, estão interessadas em contratar um seguro.
+
+**VERDADEIRA** Pessoas com idade maior que 30 anos, estão mais interessadas em contratar um seguro do que pessoas com idade menor que 30.
+
+<p align="center">
+  <img src="img/age.JPG" width="1000" title="img-age">
+</p>
+
+### H8. Pessoas que já possuiram seguro em algum momento da vida, estão mais interessados em contratar o seguro da Insurance All.
+
+**FALSA** Pessoas que <ins>nunca</ins> possuiram seguro em algum momento da vida, estão mais interessados em contratar o seguro da Insurance All.
+
+<p align="center">
+  <img src="img/insured.JPG" width="1000" title="img-insured">
+</p>
+
 # Algoritmos de Machine Learning Aplicados
 
-Os modelo treinados foram:
+Os modelos treinados foram:
 
 - kNN
 - Logistic Regression
@@ -154,9 +176,7 @@ Os modelo treinados foram:
 - XGBoost
 - Naive Bayes
 
-O modelo escolhido para resolver o problema de Insurance All foi:
-
-- XGBoost.
+O modelo com performance mail alta e escolhido para resolver o problema da Insurance All foi o **XGBoost**.
 
 # Performace dos Modelos de Machine Learning
 
@@ -164,18 +184,46 @@ As métricas usadas para comparação dos resultados foram: Precision top k (Pre
 
 | Model Name          | precision_top_20000 | recall_top_20000 |
 | ------------------- | ------------------- | ---------------- |
-| XGBoost             | 0.279046            | 0.932077         |
-| Random Forest       | 0.276826            | 0.924927         |
-| Naive Bayes         | 0.2726863           | 0.911096         |
-| KNN                 | 0.270036            | 0.902008         |
-| Logistic Regression | 0.265747            | 0.887909         |
+| XGBoost             | 0.247528            | 0.984839         |
+| Random Forest       | 0.246628            | 0.981417         |
+| Naive Bayes         | 0.246258            | 0.979945         |
+| KNN                 | 0.245968            | 0.978990         |
+| Logistic Regression | 0.243308            | 0.967132         |
 
 # Resultados
 
 ## Respondendo Perguntas do Negócio
 
+### 1. Principais Insights sobre os atributos mais relevantes de clientes interessados em adquirir um seguro de automóvel.
+
+- Pessoas com idade maior que 30 anos, são mais interessadas em contratar um seguro.
+- Pessoas que possuem automóvel com dano, possuem maior interesse em contratar um seguro.
+- Pessoas que NUNCA possuiram seguro em algum momento da vida, estão mais interessadas em contratar um seguro.
+
+### 2. Qual a porcentagem de clientes interessados em adquirir um seguro de automóvel, o time de vendas conseguirá contatar fazendo 20.000 ligações?
+
+- Ranqueando a lista de 100 mil clientes para 20 mil ligações, o time de vendas conseguirá atingir <ins>58%</ins> dos interessados.
+
+### 3. E se a capacidade do time de vendas aumentar para 40.000 ligações, qual a porcentagem de clientes interessados em adquirir um seguro de automóvel o time de vendas conseguirá contatar?
+
+- Aumentando a capacidade para 40 mil ligações, o time de vendas conseguirá atingir <ins>92%</ins> dos interessados.
+
+### 4. Quantas ligações o time de vendas precisa fazer para contatar 80% dos clientes interessados em adquirir um seguro de automóvel?
+
+- Para conseguir atingir 80% dos interessados, o time de vendas precisa realizar <ins>31 mil</ins> ligações.
+
 # Entrega da Solução
 
 ## Arquitetura Modelo em Produção
 
+<p align="center">
+  <img src="img/deploy.jpeg" width="1000" title="img-deploy">
+</p>
+
 ## Demonstração do Modelo
+
+Acesse os resultados do modelo em produção [aqui](https://streamlit-car-insurance.herokuapp.com/)
+
+<p align="center">
+  <img src="img/streamlit.gif" width="1000" title="img-deploy">
+</p>

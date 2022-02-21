@@ -3,6 +3,7 @@ import pandas as pd
 from class_.CarInsurance import CarInsurance
 from flask import Flask, request, Response
 import os
+import xgboost as xgb
 
 # loading model
 model = pickle.load(open('model/xgboost.pkl', 'rb'))
