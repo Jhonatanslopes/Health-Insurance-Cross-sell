@@ -17,12 +17,11 @@ Previsão de interesse em um seguro de automóvel.
 3.  [Entendimento do Problema](Entendimento-do-Problema)
 4.  [Dados](Descrição-de-Dados)
 5.  [Planejamento da Solução](Planejamento-da-Solução)
-6.  [Premissas Assumidas](Premissas-Assumidas)
-7.  [Hipóteses Principais](Hipóteses-Principais)
-8.  [Algoritmos ML](Algoritmos-de-Machine-Learning-Aplicados)
-9.  [Performace Modelos](Performace-dos-Modelos-de-Machine-Learning)
-10. [Resultados](Resultados)
-11. [Entrega da Solução](#Entrega-da-Solucao)
+6.  [Hipóteses Principais](Hipóteses-Principais)
+7.  [Algoritmos ML](Algoritmos-de-Machine-Learning-Aplicados)
+8.  [Performace Modelos](Performace-dos-Modelos-de-Machine-Learning)
+9.  [Resultados](Resultados)
+10. [Entrega da Solução](#Entrega-da-Solucao)
 
 <!--te-->
 
